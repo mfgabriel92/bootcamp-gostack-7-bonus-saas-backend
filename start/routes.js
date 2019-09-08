@@ -2,6 +2,10 @@
 
 const Route = use('Route')
 
+Route.post('api/auth', 'SessionController.store')
+
 Route.group(() => {
-  Route.post('auth', 'SessionController.store')
-}).prefix('api')
+  Route.resource('teams', 'TeamController').apiOnly()
+})
+  .prefix('api')
+  .middleware('auth')
