@@ -4,7 +4,7 @@ const Model = use('Model')
 
 class UserTeam extends Model {
   user () {
-    return this.hasMany('App/Models/User')
+    return this.belongsTo('App/Models/User')
   }
 }
 
