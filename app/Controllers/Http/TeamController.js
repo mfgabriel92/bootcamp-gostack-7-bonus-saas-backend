@@ -9,9 +9,7 @@ class TeamController {
    * GET teams
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
+   * @param {Auth} ctx.auth
    */
   async index ({ auth }) {
     return auth.user.teams().fetch()
@@ -23,7 +21,7 @@ class TeamController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Auth} ctx.auth
    */
   async store ({ request, auth }) {
     const data = request.only(['name'])
@@ -39,9 +37,8 @@ class TeamController {
    * GET teams/:id
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
+   * @param {Params} ctx.params
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
   async show ({ params, auth }) {
     return auth.user
@@ -55,8 +52,9 @@ class TeamController {
    * PUT or PATCH teams/:id
    *
    * @param {object} ctx
+   * @param {Params} ctx.params
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Auth} ctx.auth
    */
   async update ({ params, request, auth }) {
     const data = request.only(['name'])
@@ -77,8 +75,8 @@ class TeamController {
    * DELETE teams/:id
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
+   * @param {Params} ctx.params
+   * @param {Auth} ctx.auth
    */
   async destroy ({ params, auth }) {
     const team = await auth.user
