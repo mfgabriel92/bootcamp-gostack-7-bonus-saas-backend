@@ -1,5 +1,7 @@
 'use strict'
 
+const Invitation = use('App/Models/Invitation')
+
 /**
  * Resourceful controller for interacting with invitations
  */
@@ -12,8 +14,15 @@ class InvitationController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
-    return request.team
+  async store ({ request, auth }) {
+    const emails = request.input('emails')
+    const data = emails.map(email => ({
+      email,
+      user_id: auth.user.id,
+      team_id: request.team.id
+    }))
+
+    await Invitation.createMany(data)
   }
 }
 
