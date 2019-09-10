@@ -13,7 +13,7 @@ class DatabaseSeeder {
     })
 
     const createInvitations = await Permission.create({
-      slug: 'create-invitation',
+      slug: 'create-invitations',
       name: 'Invite Members'
     })
 
